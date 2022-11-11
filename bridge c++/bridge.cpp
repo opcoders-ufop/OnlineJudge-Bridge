@@ -33,6 +33,8 @@ int main()
 {
     vector<int> v;
     vector<int> vEnd;
+    vector<int> vOut;
+    int cont = 0;
 
     int nCases, nPeople, aux;
     cin >> nCases;
@@ -50,7 +52,10 @@ int main()
         v = shellSort(v, v.size());
         while (vEnd.size() != nPeople)
         {
-            cout << v[0] << " " << v[1] << endl;
+            // cout << v[0] << " " << v[1] << endl;
+            vOut.push_back(v[0]);
+            vOut.push_back(v[1]);
+            cont += v[1];
             vEnd.push_back(v[0]);
             vEnd.push_back(v[1]);
             v.erase(v.begin());
@@ -59,13 +64,27 @@ int main()
             {
                 vEnd = shellSort(vEnd, vEnd.size());
                 v.push_back(vEnd[0]);
-                cout << vEnd[0] << endl;
+                // cout << vEnd[0] << endl;
+                cont += vEnd[0];
+                vOut.push_back(vEnd[0]);
                 vEnd.erase(vEnd.begin());
             }
         }
         v.clear();
         vEnd.clear();
-        cout << endl;
+        cout << cont << endl;
+        while (!vOut.empty())
+        {
+            cout << vOut[0] << " " << vOut[1] << endl;
+            vOut.erase(vOut.begin());
+            vOut.erase(vOut.begin());
+            if (!vOut.empty())
+            {
+                cout << vOut[0] << endl;
+                vOut.erase(vOut.begin());
+            }
+        }
+        vOut.clear();
     }
 
     return 0;
