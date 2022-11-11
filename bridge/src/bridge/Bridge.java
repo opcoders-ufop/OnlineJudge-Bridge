@@ -20,6 +20,8 @@ public class Bridge {
         Scanner k = new Scanner(new BufferedInputStream(System.in));
         Vector<Integer> v = new Vector<Integer>();
         Vector<Integer> vEnd = new Vector<Integer>();
+        Vector<Integer> vOut = new Vector<Integer>();
+        int cont = 0;
         
         int nCases = k.nextInt();
         
@@ -31,7 +33,10 @@ public class Bridge {
             }
             Collections.sort(v);
             while(vEnd.size() != nPeople){
-                System.out.println(v.get(0)+" "+v.get(1));
+                //System.out.println(v.get(0)+" "+v.get(1));
+                vOut.add(v.get(0));
+                vOut.add(v.get(1));
+                cont+=v.get(1);
                 vEnd.add(v.get(0));
                 vEnd.add(v.get(1));
                 v.removeElementAt(0);
@@ -39,12 +44,25 @@ public class Bridge {
                 if(!v.isEmpty()){
                     Collections.sort(vEnd);
                     v.add(vEnd.get(0));
-                    System.out.println(vEnd.get(0));
+                    //System.out.println(vEnd.get(0));
+                    vOut.add(vEnd.get(0));
+                    cont+=vEnd.get(0);
                     vEnd.removeElementAt(0);
                 }
             }
             v.clear();
             vEnd.clear();
+            System.out.println(cont);
+            while(!vOut.isEmpty()){
+                System.out.println(vOut.get(0)+" "+vOut.get(1));
+                vOut.removeElementAt(0);
+                vOut.removeElementAt(0);
+                if(!vOut.isEmpty()){
+                    System.out.println(vOut.get(0));
+                    vOut.removeElementAt(0);
+                }
+            }
+            vOut.clear();
         }
         
     }
